@@ -1,7 +1,6 @@
 # Getting Started
 #### Initialize Vault
-1. `docker exec -it <vault_container> sh`
-2. `vault init -address http://127.0.0.1:8200`
+1. `curl -X PUT -d "{\"secret_shares\":5, \"secret_threshold\":3}" http://vault_url:8200/v1/sys/init`
    * __IMPORTANT__ Save the unseal keys and initial root token
 
 #### Unseal the vault
@@ -13,10 +12,10 @@
    * Unseal progress 3 of 3
 
 #### Placing your first secret
-* `curl -s -X PUT -H "X-Vault-Token:<vault_token>" -d '{"value": "world"}' http://vault_url:8200/v1/secret/hello`
+1. `curl -s -X PUT -H "X-Vault-Token:<vault_token>" -d '{"value": "world"}' http://vault_url:8200/v1/secret/hello`
 
 #### Getting your first secret
-* `curl -s -X GET -H "X-Vault-Token:<vault_token>"  http://vault_url:8200/v1/secret/hello`
+1. `curl -s -X GET -H "X-Vault-Token:<vault_token>"  http://vault_url:8200/v1/secret/hello`
 
 #### Next steps
 1. Add TLS encryption for Vault: __[Start Here](https://www.vaultproject.io/docs/configuration/listener/tcp.html)__
