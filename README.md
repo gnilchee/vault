@@ -23,4 +23,4 @@
 
 ##### Note: You will need to unseal the Vault after restarts or if you tear down the container.
 
-__WARNING__ Do not remove the persistent data created to volume mount/persist data for etcd. If you remove this after tearing down the container your data will be lost.
+__WARNING__ Do not remove the persistent data directory created after your first docker-compose up -d. This volume mount persist data for etcd to the host machine. If you remove this after tearing down the container your data will be lost.
