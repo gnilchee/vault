@@ -1,24 +1,24 @@
 # Getting Started
+#### Generate self sign cert and keys before bring up Vault/etcd
+1. `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout vault.key -out vault.crt`
+
 #### Initialize Vault
-1. `curl -X PUT -d "{\"secret_shares\":5, \"secret_threshold\":3}" http://vault_url:8200/v1/sys/init`
+1. `curl -s -k -X PUT -d "{\"secret_shares\":5, \"secret_threshold\":3}" https://vault_url:8200/v1/sys/init`
    * __IMPORTANT__ Save the unseal keys and initial root token
 
 #### Unseal the vault
-1. `curl -X PUT -d '{"key": "unseal_key_1"}' http://vault_url:8200/v1/sys/unseal`
+1. `curl -s -k -X PUT -d '{"key": "unseal_key_1"}' https://vault_url:8200/v1/sys/unseal`
    * Unseal progress 1 of 3
-2. `curl -X PUT -d '{"key": "unseal_key_2"}' http://vault_url:8200/v1/sys/unseal`
+2. `curl -s -k -X PUT -d '{"key": "unseal_key_2"}' https://vault_url:8200/v1/sys/unseal`
    * Unseal progress 2 of 3
-3. `curl -X PUT -d '{"key": "unseal_key_3"}' http://vault_url:8200/v1/sys/unseal`
+3. `curl -s -k -X PUT -d '{"key": "unseal_key_3"}' https://vault_url:8200/v1/sys/unseal`
    * Unseal progress 3 of 3
 
 #### Placing your first secret
-1. `curl -s -X PUT -H "X-Vault-Token:<vault_token>" -d '{"value": "world"}' http://vault_url:8200/v1/secret/hello`
+1. `curl -s  -k -X PUT -H "X-Vault-Token:<vault_token>" -d '{"value": "world"}' https://vault_url:8200/v1/secret/hello`
 
 #### Getting your first secret
-1. `curl -s -X GET -H "X-Vault-Token:<vault_token>"  http://vault_url:8200/v1/secret/hello`
-
-#### Next steps
-1. Add TLS encryption for Vault: __[Start Here](https://www.vaultproject.io/docs/configuration/listener/tcp.html)__
+1. `curl -s -k -X GET -H "X-Vault-Token:<vault_token>"  https://vault_url:8200/v1/secret/hello`
 
 ##### Note: You will need to unseal the Vault after restarts or if you tear down the container.
 

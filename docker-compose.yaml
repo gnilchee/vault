@@ -16,6 +16,8 @@ services:
       - etcd
     volumes:
       - ./server.hcl:/vault/config/server.hcl
+      - ./vault.crt:/vault/config/vault.crt
+      - ./vault.key:/vault/config/vault.key
     command: /bin/vault server -config=/vault/config/server.hcl
     ports:
       - 8200:8200

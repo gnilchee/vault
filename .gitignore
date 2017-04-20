@@ -1,5 +1,7 @@
 # don't persist the data volume mount
 data
+*.crt
+*.key
 
 # OS-specific
 .DS_Store
